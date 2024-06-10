@@ -45,8 +45,9 @@ function addData() {
         hour: '2-digit',
         minute: '2-digit',
     });
+    const formatnewTime = newTime.replace('AM', 'a.m').replace('PM', 'p.m');
 
-    loadData =  [...loadData, { message: newMessage, time: newTime }];
+    loadData =  [...loadData, { message: newMessage, time: formatnewTime }];
     document.getElementById('new_event').value = '';
 };
 
