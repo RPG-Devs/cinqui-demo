@@ -1,0 +1,13 @@
+---
+interface Props {
+    title: string;
+    prefix?: string;
+}
+
+const { prefix, title } = Astro.props;
+---
+
+<h1 class="font-bold text-2xl">
+    {prefix && <span class="text-accent">{prefix}</span>}
+    {title}
+</h1>

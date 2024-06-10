@@ -1,0 +1,59 @@
+---
+import TitleDescription from '~/components/TitleDescription.astro';
+import TitleHeader from '~/components/TitleHeader.astro';
+import InputText from '~/components/InputText.astro';
+import Layout from '~/layouts/Layout.astro';
+---
+
+<Layout title="Damnificados">
+    <section id="damnificados" class="grid grid-cols-6 py-10 gap-4">
+        <div class="col-start-3 col-end-5 flex-col space-y-4">
+            <TitleHeader title="Damificados" />
+            <p>TABLA de elementos va aqui</p>
+            <div class="flex space-x-4">
+                <textarea
+                    onclick=""
+                    id="nombre"
+                    rows="1"
+                    class="shadow appearance-none border py-2 px-3
+    leading-tight focus:outline-none focus:shadow-outline border-gray p-5 rounded-lg"
+                    placeholder="Nombre"></textarea>
+                <textarea
+                    onclick=""
+                    id="dni"
+                    rows="1"
+                    class="shadow appearance-none border py-2 px-3
+    leading-tight focus:outline-none focus:shadow-outline border-gray p-5 rounded-lg"
+                    placeholder='DNI"'></textarea>
+            </div>
+            <textarea
+                onclick=""
+                id="Hospital"
+                rows="1"
+                class="shadow appearance-none border py-2 px-3 w-full
+leading-tight focus:outline-none focus:shadow-outline border-gray p-5 rounded-lg"
+                placeholder='DNI"'></textarea>
+            <InputText />
+            <div class="flex w-full space-x-4">
+                <a
+                    id="agregar"
+                    type="button"
+                    class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    style="background-color: #ED1C24; border-radius: 10px;"
+                    href="/"
+                >
+                    Cerrar
+                </a>
+                <a
+                    id="agregar"
+                    type="button"
+                    class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    style="background-color: #ED1C24; border-radius: 10px;"
+                    href="/"
+                >
+                    Generar
+                </a>
+            </div>
+        </div>
+    </section>
+</Layout>

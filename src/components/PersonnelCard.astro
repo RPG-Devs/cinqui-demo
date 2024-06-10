@@ -1,0 +1,25 @@
+---
+import type { Employee } from '~/types';
+import TitleDescription from './TitleDescription.astro';
+
+interface Props {
+    employee: Employee;
+}
+
+const { employee } = Astro.props;
+---
+
+<div class="flex space-x-4 items-center border-4 border-gray p-2 rounded-lg">
+    <img
+        src="contacto.png"
+        class="w-12 h-12 rounded-full border-2 border-gray-300"
+    />
+    <div class="flex w-full justify-between items-center">
+        <div class="flex-col">
+            <TitleDescription title={employee.name} />
+            <TitleDescription title={employee.charge} />
+            <TitleDescription title={employee.identification} />
+        </div>
+        <img src="boton-llamada.png" class="w-12 h-12" />
+    </div>
+</div>

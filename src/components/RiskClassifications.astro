@@ -1,0 +1,25 @@
+---
+import type { RiskClassification } from '~/types';
+import TitleHeader from './TitleHeader.astro';
+import RiskClassificationCard from './RiskClassificationCard.astro';
+
+interface Props {
+    title: string;
+    riskClassfications: Array<RiskClassification>;
+}
+
+const { riskClassfications, title } = Astro.props;
+---
+
+<section class="space-y-4 flex-col w-full">
+    <TitleHeader title={title} />
+    <div class="flex flex-wrap">
+        {
+            riskClassfications.map((riskClassification) => (
+                <RiskClassificationCard
+                    riskClassfication={riskClassification}
+                />
+            ))
+        }
+    </div>
+</section>

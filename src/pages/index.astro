@@ -1,194 +1,202 @@
 ---
-import { defineSlot } from '@astro-elements/solid';
-import { createSignal } from 'solid-js';
+import EmergencyHeader from '~/components/EmergencyHeader.astro';
+import EventLogger from '~/components/EventLogger.astro';
+import ImageViewer from '~/components/ImageViewer.astro';
+import MapView from '~/components/MapView.astro';
+import Personnel from '~/components/Personnel.astro';
+import Equipments from '~/components/Equipments.astro';
+import RiskClassifications from '~/components/RiskClassifications.astro';
+import InputText from '~/components/InputText.astro';
+import Layout from '~/layouts/Layout.astro';
 
+import type {
+	RiskClassification,
+	Employee,
+	Equipment,
+	MessageLog,
+} from '~/types';
+import TitleHeader from '~/components/TitleHeader.astro';
+
+const riskClassifications: Array<RiskClassification> = [
+	{
+		src: 'Clases de Riesgo 1.png',
+		title: 'Clase 1 - Explosivos',
+		unCodes: ['1234', '1005'],
+	},
+	{
+		src: 'Clases de Riesgo 3.png',
+		title: 'Clase 3 - Líquidos inflamables',
+		unCodes: ['3005'],
+	},
+	{
+		src: 'Clases de Riesgo 2.png',
+		title: 'Clase 2 - Inflamables',
+		unCodes: ['2004'],
+	},
+];
+
+const staff: Array<Employee> = [
+	{
+		name: 'Jimena Soto',
+		charge: 'Operario',
+		identification: '45289655',
+	},
+	{
+		name: 'Romina Reina',
+		charge: 'Operario',
+		identification: '45289652',
+	},
+	{
+		name: 'Roberto Paz',
+		charge: 'Administrador',
+		identification: '35289652',
+	},
+	{
+		name: 'Roy Soto',
+		charge: 'Supervisor de área',
+		identification: '45611289',
+	},
+];
+
+const equipments: Array<Equipment> = [
+	{
+		name: 'Diagrama Tanques',
+		status: true,
+	},
+	{
+		name: 'Equipos de Protección',
+		status: false,
+	},
+];
+
+const userNotes: Array<MessageLog> = [
+	{
+		user: 'Roy Soto',
+		message: 'Se esta quemando los tanques',
+		time: '08:40 a.m',
+	},
+	{
+		user: 'Romina Reina',
+		message: 'Requerimos ayuda de los bomberos',
+		time: '09:20 a.m',
+	},
+];
+
+const damageAreas = ['Surtidores', 'Tanques', 'Punto de venta'];
 ---
 
-<html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CINQUI DEMO</title>
-    <link rel="stylesheet" href="/src/styles/global.css">
-  </head>
-  
-  <body class="">
+<Layout title="Emergencia">
+	<main class="w-full grid grid-cols-6 grid-row-2 p-8 gap-4">
+		<div class="row-span-1 col-span-5">
+			<EmergencyHeader />
+		</div>
 
-	<div class="container">
+		<div class="row-span-2 col-span-1">
+			<EventLogger />
+		</div>
 
-			<div class="one">
-				<h2 style="font-weight: bold"><span style="color:#ED1C24">Emergencia </span>Estación Cerro Azul</h2>
-				<p style="font-weight: bold">Jr. Cerró Azul 227, santiago de Surco 15803</p>
-				<p style="font-weight: bold">Fecha Inicio: <span style="color:#ED1C24">04/06/2024 - 09:30 a.m</span></p>
+		<div class="flex-col space-y-4">
+			<MapView
+				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.7123765111983!2d-76.97948692517328!3d-12.131821388111735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b8776a2ac8f3%3A0x605485d1e9abefc6!2sGasolinera%20Primax%2C%20Jr.Cerro%20Azul%20227%2C%20Santiago%20de%20Surco%2015803!5e0!3m2!1ses-419!2spe!4v1717621038532!5m2!1ses-419!2spe"
+				buttonText="Copiar Dirección"
+			/>
+			<ImageViewer title="Imágenes del incidente" />
+			<div>
+				<TitleHeader title="Líneas Dedicadas" />
+				<p class="text-lg text-blue-600 font-bold">+51 999 999 999</p>
+			</div>
+		</div>
+
+		<div class="col-span-4 space-y-6">
+			<RiskClassifications
+				title="Clasificaciones de riesgo"
+				riskClassfications={riskClassifications}
+			/>
+			<div class="flex space-x-4">
+				<Personnel title="Personal" staff={staff} />
+				<Equipments title="Recursos" equipments={equipments} />
 			</div>
 
-			<div class="three">
-				<div class="grid-auto-rows"> 
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.7123765111983!2d-76.97948692517328!3d-12.131821388111735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b8776a2ac8f3%3A0x605485d1e9abefc6!2sGasolinera%20Primax%2C%20Jr.Cerro%20Azul%20227%2C%20Santiago%20de%20Surco%2015803!5e0!3m2!1ses-419!2spe!4v1717621038532!5m2!1ses-419!2spe" 
-				width="380" height="380" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-				
-				<button class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" style="background-color: #D9D9D9; border-radius: 10px;">
-					Copiar dirección
-				</button>
-				</div>
-				</br>	
-				<div>
-				<h3 style="font-weight: bold">Imágenes del incidente</h3>
-				<img src="images 1.png">
-				</div>
-				</br>
-				<div>
-				<h3 style="font-weight: bold">Telefono</h3>
-				<p>+51 999 999 999</p>
-				</div>
-			</div>	
+			<div class="flex flex-col space-y-2">
+				<TitleHeader title="Damnificados" />
+				<a
+					class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-min"
+					style="background-color: #ED1C24; border-radius: 10px;"
+					href="/injured"
+				>
+					Agregar
+				</a>
+			</div>
 
-			<div class="four">
-				<h2 style="font-weight: bold">Clasificaciones de Riesgo</h2>
-				<div class="grid grid-cols-3 gap-4"> 
-					<div class="flex items-center mb-4 border border-gray-300 p-4 rounded">
-						<img src="Clases de Riesgo 1.png" class="mr-4">
-						<p>Clase 1 - Explosivos<br>Códigos UN: 1234, 1005</p>
-					</div>
-				
-					<div class="flex items-center mb-4 border border-gray-300 p-4 rounded"> 
-						<img src="Clases de Riesgo 3.png" class="mr-4">
-						<p>Clase 3 - Líquidos inflamables<br>Códigos UN: 3005</p>
-					</div>
-			
-					<div class="flex items-center mb-4 border border-gray-300 p-4 rounded">
-						<img src="Clases de Riesgo 2.png" class="mr-4">
-						<p>Clase 2 - Inflamables<br>Códigos UN: 2004</p>
-					</div>
+			<div class="flex flex-col space-y-2">
+				<TitleHeader title="Anotaciones usuarios" />
+				<div class="border-4 border-gray p-5 rounded-lg min-h-3/4">
+					<ul class="flex-col space-y-4">
+						{
+							userNotes.map((data) => (
+								<li class="flex space-x-4">
+									<p class="whitespace-nowrap">{data.time}</p>
+									<p class="">{data.message}</p>
+								</li>
+							))
+						}
+					</ul>
 				</div>
 			</div>
-			
-			<div class="five">
-				<div class="grid grid-cols-2 grid-rows-1 gap-4"> 
-					<div class="">
-						<h2 style="font-weight: bold">Personal</h2>
-						<p style="font-weight: bold; color:#ED1C24;">4 activos</p>
-					</br>
-						<div class="flex items-center mb-4 border border-gray-300 p-4 rounded">
-							<img src="contacto.png" class="mr-4 w-16 h-16 rounded-full border-2 border-gray-300">
-							<p>Roy Soto<br>Supervisor de área<br>DNI: 45611289</p>
-							<img src="boton-llamada.png" class="ml-4">
-						</div>
-			
-						<div class="flex items-center mb-4 border border-gray-300 p-4 rounded">
-							<img src="contacto.png" class="mr-4 w-16 h-16 rounded-full border-2 border-gray-300">
-							<p>Jimena Soto<br>Operario<br>DNI: 45289655</p>
-							<img src="boton-llamada.png" class="ml-4">
-						</div>
-			
-						<div class="flex items-center mb-4 border border-gray-300 p-4 rounded">
-							<img src="contacto.png" class="mr-4 w-16 h-16 rounded-full border-2 border-gray-300">
-							<p>Romina Reina<br>Operario<br>DNI: 45289652</p>
-							<img src="boton-llamada.png" class="ml-4">
-						</div>
 
-						<div class="flex items-center justify-between mb-4 border border-gray-300 p-4 rounded">
-							<img src="contacto.png" class="mr-4 w-16 h-16 rounded-full border-2 border-gray-300">
-							<p>Roberto Paz<br>Administrador<br>DNI: 35289652</p>
-							<img src="boton-llamada.png" class="ml-4">
-						</div>
-
-					</div>    
-			
-					<div class="">
-						<h2 style="font-weight: bold">Recursos</h2>
-						<p style="font-weight: bold; color:#ED1C24;">1 activos</p>
-					</br>
-						<div class="flex items-center mb-4 border border-gray-300 p-4 rounded">
-							<img src="Group 19.png" class="mr-4">
-								<p>Diagrama Tanques</p>
-						</div>
-			
-						<div class="flex items-center mb-4 border border-gray-300 p-4 rounded">
-							<img src="Group 19.png" class="mr-4">
-							<p>Equipos de Protección</p>
-						</div>
-					</div>  
-					
-					<div class="grid grid-cols-1 p-4">
-						<h2 style="font-weight: bold">Damnificados</h2>
-						<div class="mb-4">
-						<button class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
-						style="background-color: #ED1C24; border-radius: 10px;">
-							Agregar
-						</button>
-						</div>	
-					</div>  
-				</div>
-				<div class="grid grid-cols-1 mx-auto p-4">
-					<h2 class="font-bold">Anotaciones usuarios</h2>
-					<br>
-					<textarea id="anotaciones" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
-					leading-tight focus:outline-none focus:shadow-outline"></textarea>
-					<br>
-					<div class="mb-4">
-					  <button id="agregar" type="button" class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" style="background-color: #ED1C24; border-radius: 10px;">
+			<div class="flex flex-col space-y-2">
+				<TitleHeader title="Áreas afectadas" />
+				<div class="flex space-x-2 w-min">
+					<textarea
+						onclick=""
+						id="areas_afectadas"
+						rows="1"
+						class="shadow appearance-none border py-2 px-3
+    leading-tight focus:outline-none focus:shadow-outline border-gray p-5 rounded-lg"
+						placeholder="Estación de almacen..."></textarea>
+					<button
+						id="agregar"
+						type="button"
+						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+						style="background-color: #ED1C24; border-radius: 10px;"
+					>
 						Agregar
-					  </button>
-					</div>		
+					</button>
 				</div>
+				<li class="flex space-x-4">
+					{
+						damageAreas.map((area) => (
+							<ul class="whitespace-nowrap bg-accent rounded-lg p-2">
+								<p class="text-white font-bold">{area}</p>
+							</ul>
+						))
+					}
+				</li>
+			</div>
 
-				<div class="grid grid-cols-1 mx-auto p-4">
-					<h2 class="font-bold">Áreas afectadas</h2>
-					<br>
-					<div class="flex items-center">
-						<textarea id="anotaciones" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
-						leading-tight focus:outline-none focus:shadow-outline" placeholder="Estación de almacen..."></textarea>
-					 	<button id="agregar" type="button" class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" style="background-color: #ED1C24; border-radius: 10px;">
-						Agregar
-					  	</button>
-					</div>		
-				</div>
-
-				<div class="grid grid-cols-1 mx-auto p-4">
-					<h2 class="font-bold">Informe de Reporte</h2>
-					<br>
-					<textarea id="anotaciones" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
-					leading-tight focus:outline-none focus:shadow-outline" placeholder="Estación de almacen..."></textarea>
-					<br>
-					<div class="mb-4">
-					  <button id="agregar" type="button" class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" style="background-color: #ED1C24; border-radius: 10px;">
+			<div class="flex-col space-y-2">
+				<TitleHeader title="Informe de Reporte" />
+				<InputText />
+				<div class="flex w-full space-x-4">
+					<a
+						href="/emergency_diagram"
+						id="agregar"
+						type="button"
+						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+						style="background-color: #ED1C24; border-radius: 10px;"
+					>
 						Diagrama de emergencia
-					  </button>
-					  <button id="agregar" type="button" class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" style="background-color: #ED1C24; border-radius: 10px;">
+					</a>
+					<button
+						id="agregar"
+						type="button"
+						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+						style="background-color: #ED1C24; border-radius: 10px;"
+					>
 						Generar informe
-					  </button>
-					</div>		
+					</button>
 				</div>
-
-				</div>
-				
-				<div class="two">
-					<div class="text-center p-4 rounded-lg shadow-md">
-						<div class="grid grid-cols-1 mx-auto p-1">
-						<h2 class="font-bold">Eventos del incidente</h2>
-						<div id="textoImpreso" class="border border-gray-300 p-5 rounded mt-4"></div>
-						<br>
-						<textarea id="texto" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-						placeholder="La emergencia..."></textarea>
-						<br>
-						<div class="mb-4">
-						  <button id="agregar" type="button" class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" style="background-color: #ED1C24; border-radius: 10px;">
-						Agregar
-						  </button>
-						</div>		
-				  	</div>
-				  	<script>
-						document.getElementById('agregar').addEventListener('click', function() {
-						var texto = document.getElementById('texto').value;
-						var textoImpreso = document.getElementById('textoImpreso');
-						textoImpreso.innerText = texto;
-						});
-				  	</script>
-				</div>
-				</div>		
-				
 			</div>
-	</div>
-  </body>
-</html>
+		</div>
+	</main>
+</Layout>

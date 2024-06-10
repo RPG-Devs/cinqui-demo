@@ -1,0 +1,19 @@
+---
+import TitleDescription from './TitleDescription.astro';
+import TitleHeader from './TitleHeader.astro';
+
+interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="flex-col space-y-4">
+    <TitleHeader title={title} />
+    <img src="images 1.png" />
+    <div class="flex space-x-4">
+        <img src="images 2.png" />
+        <img src="images 3.png" />
+    </div>
+</section>

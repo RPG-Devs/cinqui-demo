@@ -1,0 +1,24 @@
+---
+import type { RiskClassification } from '~/types';
+import TitleDescription from './TitleDescription.astro';
+
+interface Props {
+    riskClassfication: RiskClassification;
+}
+
+const { riskClassfication } = Astro.props;
+---
+
+<div
+    class="border-4 border-gray flex items-center p-2 rounded space-x-4 w-100 h-20 m-2"
+>
+    <img width="15%" height="80" src={riskClassfication.src} />
+    <div class="flex-col">
+        <TitleDescription title={riskClassfication.title} />
+        <TitleDescription
+            customColor="text-accent"
+            title={'Códigos UN: ' +
+                riskClassfication.unCodes.map((code) => code).join(', ')}
+        />
+    </div>
+</div>

@@ -1,0 +1,22 @@
+---
+import type { Employee } from '~/types';
+import TitleHeader from './TitleHeader.astro';
+import TitleDescription from './TitleDescription.astro';
+import PersonnelCard from './PersonnelCard.astro';
+
+interface Props {
+    title: string;
+    staff: Array<Employee>;
+}
+
+const { staff, title } = Astro.props;
+---
+
+<section class="flex-col space-y-2">
+    <TitleHeader title={title} />
+    <TitleDescription
+        customColor="text-accent"
+        title={staff.length + ' Activos'}
+    />
+    {staff.map((employee) => <PersonnelCard employee={employee} />)}
+</section>

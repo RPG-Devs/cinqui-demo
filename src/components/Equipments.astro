@@ -1,0 +1,25 @@
+---
+import type { Equipment } from '~/types';
+import TitleHeader from './TitleHeader.astro';
+import TitleDescription from './TitleDescription.astro';
+import EquipmentCard from './EquipmentCard.astro';
+
+interface Props {
+    title: string;
+    equipments: Array<Equipment>;
+}
+
+const { equipments, title } = Astro.props;
+
+// active equipments
+const equipments_active = equipments.filter((equipment) => equipment.status);
+---
+
+<section class="flex-col space-y-2">
+    <TitleHeader title={title} />
+    <TitleDescription
+        customColor="text-accent"
+        title={equipments_active.length + ' Activos'}
+    />
+    {equipments.map((equipment) => <EquipmentCard equipment={equipment} />)}
+</section>
