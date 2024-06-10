@@ -3,6 +3,7 @@ import TitleDescription from '~/components/TitleDescription.astro';
 import TitleHeader from '~/components/TitleHeader.astro';
 import InputText from '~/components/InputText.astro';
 import Layout from '~/layouts/Layout.astro';
+import AddCircle from '~/components/addCircle.svelte';
 ---
 
 <Layout title="Diagrama">
@@ -14,7 +15,7 @@ import Layout from '~/layouts/Layout.astro';
                 src="plano.jpeg"
                 class="w-full aspect-square rounded-lg border-2 border-gray border-gray-300"
             />
-            <InputText />
+            <InputText />   
             <div class="flex w-full space-x-4">
                 <a
                     id="agregar"
@@ -38,6 +39,7 @@ import Layout from '~/layouts/Layout.astro';
         </div>
         <div class="flex flex-col row-start-1 col-start-4">
             <TitleDescription title="Herramientas" />
+            <AddCircle client:load /> 
             <div
                 class="flex flex-col space-y-4 items-center border-4 border-gray p-2 rounded-lg"
             >
