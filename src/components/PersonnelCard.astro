@@ -9,17 +9,19 @@ interface Props {
 const { employee } = Astro.props;
 ---
 
-<div class="flex space-x-4 items-center border-4 border-gray p-2 rounded-lg">
+<div
+    class="flex space-x-4 items-center border-4 border-gray px-4 py-2 rounded-lg"
+>
     <img
         src="contacto.png"
-        class="w-12 h-12 rounded-full border-2 border-gray-300"
+        class="w-12 h-12 rounded-full border-2 border-gray p-2"
     />
-    <div class="flex w-full justify-between items-center">
+    <div class="flex w-full justify-between items-center space-x-4">
         <div class="flex-col">
             <TitleDescription title={employee.name} />
             <TitleDescription title={employee.charge} />
             <TitleDescription title={employee.identification} />
         </div>
-        <img src="boton-llamada.png" class="w-12 h-12" />
+        <img src="boton-llamada.png" class="w-8 h-8" />
     </div>
 </div>

@@ -7,7 +7,9 @@ import Personnel from '~/components/Personnel.astro';
 import Equipments from '~/components/Equipments.astro';
 import RiskClassifications from '~/components/RiskClassifications.astro';
 import InputText from '~/components/InputText.astro';
+import ChipInput from '~/components/ChipInput.svelte';
 import Layout from '~/layouts/Layout.astro';
+import TitleHeader from '~/components/TitleHeader.astro';
 
 import type {
 	RiskClassification,
@@ -15,7 +17,6 @@ import type {
 	Equipment,
 	MessageLog,
 } from '~/types';
-import TitleHeader from '~/components/TitleHeader.astro';
 
 const riskClassifications: Array<RiskClassification> = [
 	{
@@ -81,8 +82,6 @@ const userNotes: Array<MessageLog> = [
 		time: '09:20 a.m',
 	},
 ];
-
-const damageAreas = ['Surtidores', 'Tanques', 'Punto de venta'];
 ---
 
 <Layout title="Emergencia">
@@ -146,32 +145,7 @@ const damageAreas = ['Surtidores', 'Tanques', 'Punto de venta'];
 
 			<div class="flex flex-col space-y-2">
 				<TitleHeader title="Áreas afectadas" />
-				<div class="flex space-x-2 w-min">
-					<textarea
-						onclick=""
-						id="areas_afectadas"
-						rows="1"
-						class="shadow appearance-none border py-2 px-3
-    leading-tight focus:outline-none focus:shadow-outline border-gray p-5 rounded-lg"
-						placeholder="Estación de almacen..."></textarea>
-					<button
-						id="agregar"
-						type="button"
-						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-						style="background-color: #ED1C24; border-radius: 10px;"
-					>
-						Agregar
-					</button>
-				</div>
-				<li class="flex space-x-4">
-					{
-						damageAreas.map((area) => (
-							<ul class="whitespace-nowrap bg-accent rounded-lg p-2">
-								<p class="text-white font-bold">{area}</p>
-							</ul>
-						))
-					}
-				</li>
+				<ChipInput client:load />
 			</div>
 
 			<div class="flex-col space-y-2">
