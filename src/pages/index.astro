@@ -1,6 +1,6 @@
 ---
 import EmergencyHeader from '~/components/EmergencyHeader.astro';
-import EventLogger from '~/components/EventLogger.astro';
+import EventLogger from '~/components/EventLogger.svelte';
 import ImageViewer from '~/components/ImageViewer.astro';
 import MapView from '~/components/MapView.astro';
 import Personnel from '~/components/Personnel.astro';
@@ -91,7 +91,8 @@ const userNotes: Array<MessageLog> = [
 		</div>
 
 		<div class="row-span-2 col-span-1">
-			<EventLogger />
+			<TitleHeader title="Eventos del incidente" />
+			<EventLogger client:load />
 		</div>
 
 		<div class="flex-col space-y-4">
