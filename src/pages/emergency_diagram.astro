@@ -1,21 +1,53 @@
 ---
 import TitleDescription from '~/components/TitleDescription.astro';
 import TitleHeader from '~/components/TitleHeader.astro';
-import InputText from '~/components/InputText.astro';
 import Layout from '~/layouts/Layout.astro';
 import AddCircle from '~/components/addCircle.svelte';
+
+// <div class="flex flex-col row-start-1 col-start-4">
+//             <TitleDescription title="Herramientas" />
+//             <div
+//                 class="flex flex-col space-y-4 items-center border-4 border-gray p-2 rounded-lg"
+//             >
+//                 <button
+//                     id="agregar"
+//                     type="button"
+//                     class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+//                     style="background-color: #ED1C24; border-radius: 10px;"
+//                 >
+//                     Agregar circulo
+//                 </button>
+//                 <button
+//                     id="agregar"
+//                     type="button"
+//                     class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline bg-blue-600"
+//                     style="border-radius: 10px;"
+//                 >
+//                     Agregar punto
+//                 </button>
+//             </div>
+//         </div>
 ---
 
 <Layout title="Diagrama">
-    <section id="diagram" class="grid grid-cols-5 py-10 gap-4">
-        <div class="col-start-2 col-end-4 flex-col space-y-4">
+    <section
+        id="diagram"
+        class="flex relative min-h-screen w-full items-center justify-center"
+    >
+        <img src="plano.jpeg" class="p-8 h-screen aspect-square" />
+        <AddCircle client:load />
+        <div class="max-w-200 absolute top-0 left-0 p-8">
             <TitleHeader title="Diagrama de emergencia" />
             <TitleDescription title="Marca las afectadas áreas" />
-            <img
-                src="plano.jpeg"
-                class="w-full aspect-square rounded-lg border-2 border-gray border-gray-300"
-            />
-            <InputText />   
+        </div>
+        <div class="flex flex-col space-y-4 absolute bottom-0 right-0 p-8">
+            <div class="border-4 border-gray p-4 rounded-lg">
+                <textarea
+                    rows="5"
+                    class="shadow appearance-none border w-full py-2 px-3
+                leading-tight focus:outline-none focus:shadow-outline border-gray p-5 rounded-lg"
+                    placeholder="Estación de almacen..."></textarea>
+            </div>
             <div class="flex w-full space-x-4">
                 <a
                     id="agregar"
@@ -35,30 +67,6 @@ import AddCircle from '~/components/addCircle.svelte';
                 >
                     Generar
                 </a>
-            </div>
-        </div>
-        <div class="flex flex-col row-start-1 col-start-4">
-            <TitleDescription title="Herramientas" />
-            <AddCircle client:load /> 
-            <div
-                class="flex flex-col space-y-4 items-center border-4 border-gray p-2 rounded-lg"
-            >
-                <button
-                    id="agregar"
-                    type="button"
-                    class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    style="background-color: #ED1C24; border-radius: 10px;"
-                >
-                    Agregar circulo
-                </button>
-                <button
-                    id="agregar"
-                    type="button"
-                    class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline bg-blue-600"
-                    style="border-radius: 10px;"
-                >
-                    Agregar punto
-                </button>
             </div>
         </div>
     </section>

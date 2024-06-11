@@ -1,55 +1,119 @@
 <script>
-    import { writable } from 'svelte/store';
-  
-    let circles = writable([]);
-  
-    function addCircle() {
-      const x = Math.random() * window.innerWidth;
-      const y = Math.random() * window.innerHeight;
-      circles.update(circles => [...circles, { id: Date.now(), x, y }]);
-    }
-  
-    function onDrag(event, circle) {
-      const rect = event.target.getBoundingClientRect();
-      const offsetX = event.clientX - rect.left - circle.x;
-      const offsetY = event.clientY - rect.top - circle.y;
-  
-      const moveHandler = (moveEvent) => {
-        circle.x = moveEvent.clientX - rect.left - offsetX;
-        circle.y = moveEvent.clientY - rect.top - offsetY;
-        circles.update(circles => circles.map(c => c.id === circle.id ? circle : c));
-      };
-  
-      const upHandler = () => {
-        window.removeEventListener('mousemove', moveHandler);
-        window.removeEventListener('mouseup', upHandler);
-      };
-  
-      window.addEventListener('mousemove', moveHandler);
-      window.addEventListener('mouseup', upHandler);
-    }
-  </script>
-  
-  <style>
-    .circle {
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      background-color: rgba(237, 28, 36, 0.5);
-      cursor: pointer;
-    }
-  </style>
-  
-  <div class="relative w-full h-full">
-    <button on:click={addCircle} class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline bg-red-600" style="border-radius: 10px;">
-      Agregar círculo
-    </button>
-    {#each $circles as circle (circle.id)}
-      <div
-        class="circle"
-        style="left: {circle.x}px; top: {circle.y}px;"
-        on:mousedown={(event) => onDrag(event, circle)}
-      ></div>
-    {/each}
+    
+    let i = 0;
+	let undoStack = [[]];
+	let circles = [];
+	let selected;
+	let adjusting = false;
+	let adjusted = false;
+
+	function handleClick(event) {
+		if (adjusting) {
+			adjusting = false;
+
+			// if circle was adjusted,
+			// push to the stack
+			if (adjusted) push();
+			return;
+		}
+
+		const circle = {
+			cx: event.clientX,
+			cy: event.clientY,
+			r: 50
+		};
+
+		circles = circles.concat(circle);
+		selected = circle;
+
+		push();
+	}
+
+	function adjust(event) {
+		selected.r = +event.target.value;
+		circles = circles;
+		adjusted = true;
+	}
+
+	function select(circle, event) {
+		if (!adjusting) {
+			event.stopPropagation();
+			selected = circle;
+		}
+	}
+
+	function push() {
+		const newUndoStack = undoStack.slice(0, ++i);
+		newUndoStack.push(clone(circles));
+		undoStack = newUndoStack;
+	}
+
+	function travel(d) {
+		circles = clone(undoStack[(i += d)]);
+		adjusting = false;
+	}
+
+	function clone(circles) {
+		return circles.map(({ cx, cy, r }) => ({ cx, cy, r }));
+	}
+
+</script>
+
+<div class="absolute bg-transparent h-full w-full">
+  <svg class="h-full w-full bg-transparent" on:click={handleClick}>
+    {#each circles as circle}
+		<circle
+			cx={circle.cx}
+			cy={circle.cy}
+			r={circle.r}
+			on:click={(event) => select(circle, event)}
+			on:contextmenu|stopPropagation|preventDefault={() => {
+				adjusting = !adjusting;
+				if (adjusting) selected = circle;
+			}}
+			fill={circle === selected ? '#FF0000' : '#FF4800'}
+		/>
+	  {/each}
+  </svg>
+  {#if adjusting}
+    <div class="adjuster">
+      <p>Ajustar diámetro </p>
+      <input type="range" value={selected.r} on:input={adjust} />
+    </div>
+  {/if}
   </div>
+
+<style>
+	.controls {
+		position: absolute;
+		width: 100%;
+		text-align: center;
+	}
+
+	svg {
+		background-color: #fff;
+    opacity: 0.4;
+		width: 100%;
+		height: 100%;
+	}
+
+	circle {
+		stroke: gray;
+	}
+
+	.adjuster {
+		position: absolute;
+		width: 80%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 1em;
+		text-align: center;
+		background-color: rgba(255, 255, 255, 0.7);
+		border-radius: 4px;
+	}
+
+	input[type='range'] {
+		width: 100%;
+	}
+</style>

@@ -67,7 +67,7 @@ export let loadData = [
 
     </script>
 
-    <section class="flex-col h-screen space-y-4 fixed">
+    <section class="flex flex-col space-y-4 mt-4">
         <div id="textoImpreso" class="border-4 border-gray p-5 rounded-lg min-h-3/4">
             <ul class="flex-col space-y-4">
                 {#each loadData as data}

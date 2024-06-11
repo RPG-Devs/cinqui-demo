@@ -5,7 +5,6 @@
     let dni = '';
     let rows = [];
 
-    // Función para agregar
     function agregarDatos() {
         rows = [...rows, { nombre, dni, hospital }];
         // Limpiar los campos después de agregar los datos
@@ -32,18 +31,18 @@
 <section id="damnificados" class="grid py-10 gap-4">
     <div class="flex-col space-y-4">
         <div class="border-4 border-gray p-4 rounded-lg">
-        <table class="min-w-full border-collapse block md:table">
+        <table class="min-w-full border-collapse table" rules="all">
             <thead class="block md:table-header-group">
-                <tr class="border border-gray border-4 block md:table-row absolute -top-full md:top-auto -left-full md:left-auto md:relative">
+                <tr class="border-gray border-2 table-row -top-full md:top-auto -left-full md:left-auto md:relative rounded-lg">
                     <th class="w-3.5/10 text-left p-2">Hospital</th>
                     <th class="w-3.5/10 text-left p-2">Nombre</th>
                     <th class="w-1.5/10 text-left p-2">DNI</th>
                     <th class="w-1.5/10 text-left p-2">Acciones</th>
                 </tr>
             </thead>
-            <tbody class="block md:table-row-group">
+            <tbody>
                 {#each rows as row, index}
-                    <tr class="bg-gray-100 border-4 border-gray block md:table-row">
+                    <tr class="border-gray border-2 block md:table-row">
                         <td class="w-3.5/10 p-2">{row.hospital}</td>
                         <td class="w-3.5/10 p-2">{row.nombre}</td>
                         <td class="w-1.5/10 p-2">{row.dni}</td>
