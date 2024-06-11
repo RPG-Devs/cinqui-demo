@@ -5,6 +5,8 @@ import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://rpg-devs.github.io/cinqui-demo",
   output: 'static',
+  outDir: './docs',
   integrations: [tailwind(), svelte()]
 });
