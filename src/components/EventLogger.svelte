@@ -1,16 +1,16 @@
-<script>
-   
+<script> 
+
 export let loadData = [
-            {
-                message: 'El incidente fue reportado por Roy Soto.',
-                time: '08:40 a.m',
-            },
-            {
-                message: 'El equipo de bomberos llego a la zona.',
-                time: '09:10 a.m',
-            },
-            {
-                message: 'El equipo de bomberos contuvo el incidente.',
+        {
+            message: 'El incidente fue reportado por Roy Soto.',
+            time: '08:40 a.m',
+        },
+        {
+            message: 'El equipo de bomberos llego a la zona.',
+            time: '09:10 a.m',
+        },
+        {
+            message: 'El equipo de bomberos contuvo el incidente.',
                 time: '09:25 a.m',
             },
             {
@@ -24,11 +24,11 @@ export let loadData = [
             {
                 message: 'La policía llego a la zona del incidente.',
                 time: '11:20 a.m',
-            },
-        ];
+            }
+    ];
 
-        // add new item to loadData
-        function addData() {
+    // add new item to loadData
+    function addData() {
             const newMessage = document.getElementById('new_event').value;
             const newTime = new Date().toLocaleTimeString('en-US', {
                 hour: '2-digit',
@@ -65,20 +65,20 @@ export let loadData = [
             textarea.focus();
         }
 
-    </script>
+</script>
 
-    <section class="flex flex-col space-y-4 mt-4">
-        <div id="textoImpreso" class="border-4 border-gray p-5 rounded-lg min-h-3/4">
-            <ul class="flex-col space-y-4">
-                {#each loadData as data}
-                    <li class="flex space-x-4">
-                        <p class="whitespace-nowrap">{data.time}</p>
-                        <p class="">{data.message}</p>
-                    </li>
-                {/each}
-            </ul>
-        </div>    
-        <div class="border-4 border-gray p-4 rounded-lg">
+<section class="flex flex-col space-y-4 mt-4">
+    <div id="textoImpreso" class="border-4 border-gray p-5 rounded-lg min-h-3/4">
+        <ul class="flex-col space-y-4">
+            {#each loadData as data}
+            <li class="flex space-x-4">
+                <p class="whitespace-nowrap">{data.time}</p>
+                <p class="">{data.message}</p>
+            </li>
+            {/each}
+        </ul>
+    </div>    
+    <div class="border-4 border-gray p-4 rounded-lg">
             <button
                 on:click={addBombero}
                 id="bombero"
@@ -124,4 +124,5 @@ export let loadData = [
             </button>
             
         </div>
-    </section>
+    </div>
+</section>
