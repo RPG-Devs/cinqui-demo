@@ -3,6 +3,11 @@ import TitleDescription from '~/components/TitleDescription.astro';
 import TitleHeader from '~/components/TitleHeader.astro';
 import Layout from '~/layouts/Layout.astro';
 import AddCircle from '~/components/addCircle.svelte';
+import { Image } from 'astro:assets';
+import planoImage from '~/assets/plano.jpeg';
+
+const widths = [450, 800, 1200, 1600, 2000];
+const sizes = '100vw';
 ---
 
 <Layout title="Diagrama">
@@ -10,7 +15,13 @@ import AddCircle from '~/components/addCircle.svelte';
         id="diagram"
         class="flex relative min-h-screen w-full items-center justify-center"
     >
-        <img src="plano.jpeg" class="p-8 h-screen aspect-square" />
+        <Image
+            class="h-full w-1/2 object-cover"
+            src={planoImage}
+            widths={widths}
+            sizes={sizes}
+            alt={'Plano de emergencia'}
+        />
         <AddCircle client:load />
         <div class="max-w-200 absolute top-0 left-0 p-8">
             <TitleHeader title="Diagrama de emergencia" />
