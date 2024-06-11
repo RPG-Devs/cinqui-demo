@@ -84,6 +84,28 @@ const userNotes: Array<MessageLog> = [
 ];
 ---
 
+<script>
+	const url =
+		'https://cinqui-org-api-7d24e9e1bc4d.herokuapp.com/api/v1/document_stages/send_email';
+
+	// make a request
+	const postRequest = async (url, _) => {
+		const response = await fetch(url, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		return response.json();
+	};
+
+	const button = document.getElementById('generar_informe');
+	button!.addEventListener('click', async () => {
+		const response = await postRequest(url, null);
+		console.log(response);
+	});
+</script>
+
 <Layout title="Emergencia">
 	<main class="w-full grid grid-cols-6 grid-row-2 p-8 gap-4">
 		<div class="row-span-1 col-span-5">
@@ -124,7 +146,7 @@ const userNotes: Array<MessageLog> = [
 				<a
 					class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-min"
 					style="background-color: #ED1C24; border-radius: 10px;"
-					href="/injured"
+					href="/cinqui-demo/injured"
 				>
 					Agregar
 				</a>
@@ -156,7 +178,7 @@ const userNotes: Array<MessageLog> = [
 				<InputText />
 				<div class="flex w-full space-x-4">
 					<a
-						href="/emergency_diagram"
+						href="/cinqui-demo/emergency_diagram"
 						id="agregar"
 						type="button"
 						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -165,7 +187,7 @@ const userNotes: Array<MessageLog> = [
 						Diagrama de emergencia
 					</a>
 					<button
-						id="agregar"
+						id="generar_informe"
 						type="button"
 						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 						style="background-color: #ED1C24; border-radius: 10px;"

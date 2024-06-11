@@ -92,7 +92,7 @@
                     type="button"
                     class="text-white font-bold py-2 px-20 rounded focus:outline-none focus:shadow-outline"
                     style="background-color: #D9D9D9; border-radius: 10px;"
-                    href="/"
+                    href="/cinqui-demo"
                 >
                     Cerrar
                 </a>
