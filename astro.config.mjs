@@ -7,6 +7,5 @@ import svelte from "@astrojs/svelte";
 export default defineConfig({
   site: "https://rpg-devs.github.io",
   base: "/cinqui-demo",
-  output: 'static',
   integrations: [tailwind(), svelte()]
 });
