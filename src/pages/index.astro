@@ -89,7 +89,7 @@ const userNotes: Array<MessageLog> = [
 		'https://cinqui-org-api-7d24e9e1bc4d.herokuapp.com/api/v1/document_stages/send_email';
 
 	// make a request
-	const postRequest = async (url, _) => {
+	const postRequest = async () => {
 		const response = await fetch(url, {
 			method: 'POST',
 			headers: {
@@ -101,7 +101,7 @@ const userNotes: Array<MessageLog> = [
 
 	const button = document.getElementById('generar_informe');
 	button!.addEventListener('click', async () => {
-		const response = await postRequest(url, null);
+		const response = await postRequest();
 		console.log(response);
 	});
 </script>
