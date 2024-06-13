@@ -8,6 +8,6 @@ export default defineConfig({
   // For local development, use the following:
   //base: "",
   // For production, use the following:
-  base: "/cinqui-demo"
+  base: "/cinqui-demo",
   integrations: [tailwind(), svelte()]
 });
