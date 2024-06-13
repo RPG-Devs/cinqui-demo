@@ -82,6 +82,8 @@ const userNotes: Array<MessageLog> = [
 		time: '09:20 a.m',
 	},
 ];
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 ---
 
 <script>
@@ -146,7 +148,7 @@ const userNotes: Array<MessageLog> = [
 				<a
 					class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-min"
 					style="background-color: #ED1C24; border-radius: 10px;"
-					href="/cinqui-demo/injured"
+					href=`${base}/injured`
 				>
 					Agregar
 				</a>
@@ -178,7 +180,7 @@ const userNotes: Array<MessageLog> = [
 				<InputText />
 				<div class="flex w-full space-x-4">
 					<a
-						href="/cinqui-demo/emergency_diagram"
+						href=`${base}/emergency_diagram`
 						id="agregar"
 						type="button"
 						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

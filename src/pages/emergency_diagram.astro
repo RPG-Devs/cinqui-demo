@@ -8,6 +8,8 @@ import planoImage from '~/assets/plano.jpeg';
 
 const widths = [450, 800, 1200, 1600, 2000];
 const sizes = '100vw';
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Diagrama">
@@ -41,7 +43,7 @@ const sizes = '100vw';
                     type="button"
                     class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     style="background-color: #ED1C24; border-radius: 10px;"
-                    href="/cinqui-demo"
+                    href={base}
                 >
                     Cerrar
                 </a>
@@ -50,7 +52,7 @@ const sizes = '100vw';
                     type="button"
                     class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     style="background-color: #ED1C24; border-radius: 10px;"
-                    href="/cinqui-demo"
+                    href={base}
                 >
                     Generar
                 </a>

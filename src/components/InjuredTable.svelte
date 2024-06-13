@@ -26,6 +26,8 @@
         dni = oldDni;
         eliminar(index);
     }
+    
+    const base = import.meta.env.BASE_URL
 </script>
 
 <section id="damnificados" class="grid py-10 gap-4">
@@ -92,7 +94,7 @@
                     type="button"
                     class="text-white font-bold py-2 px-20 rounded focus:outline-none focus:shadow-outline"
                     style="background-color: #D9D9D9; border-radius: 10px;"
-                    href="/cinqui-demo"
+                    href={base}
                 >
                     Cerrar
                 </a>
