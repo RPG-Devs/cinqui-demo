@@ -21,7 +21,7 @@ const { title } = Astro.props;
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // Selecciona la imagen principal
-        const mainImage = document.getElementById('mainImage');
+        const mainImage = document.getElementById('mainImage') as HTMLImageElement;
 
         // Selecciona todas las imágenes pequeñas
         const thumbnails = document.querySelectorAll('.thumbnail');
@@ -30,7 +30,7 @@ const { title } = Astro.props;
         thumbnails.forEach(thumbnail => {
             thumbnail.addEventListener('click', () => {
                 // Cambia el src de la imagen principal al src de la imagen pequeña clicada
-                mainImage.src = thumbnail.src;
+                mainImage!.src = (thumbnail as HTMLImageElement).src;
             });
         });
     });
