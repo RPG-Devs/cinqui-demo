@@ -9,3 +9,9 @@ Hosted using [github pg](https://rpg-devs.github.io/cinqui-demo/)
 - Injured 
 
 
+## Variables
+
+```
+BASE_URL: /cinqui-demo/
+```
+

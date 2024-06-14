@@ -94,6 +94,8 @@ const userNotes: Array<MessageLog> = [
 		time: '09:20 a.m',
 	},
 ];
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 ---
 
 <script>
@@ -155,15 +157,32 @@ const userNotes: Array<MessageLog> = [
 			<div class="flex flex-col space-y-4 border-2 border-gray rounded-lg p-10">
 				<Personnel title="Personal" staff={staff} />
 				<Equipments title="Recursos" equipments={equipments} />
-				<div class="flex flex-col space-y-2">
-					<TitleHeader title="Damnificados" />
-					<a
-						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-min"
-						style="background-color: #ED1C24; border-radius: 10px;"
-						href="/injured"
-					>
-						Agregar
-					</a>
+			</div>
+
+			<div class="flex flex-col space-y-2">
+				<TitleHeader title="Damnificados" />
+				<a
+					class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-min"
+					style="background-color: #ED1C24; border-radius: 10px;"
+					href=`${base}/injured`
+				>
+					Agregar
+				</a>
+			</div>
+
+			<div class="flex flex-col space-y-2">
+				<TitleHeader title="Anotaciones usuarios" />
+				<div class="border-4 border-gray p-5 rounded-lg min-h-3/4">
+					<ul class="flex-col space-y-4">
+						{
+							userNotes.map((data) => (
+								<li class="flex space-x-4">
+									<p class="whitespace-nowrap">{data.time}</p>
+									<p class="">{data.message}</p>
+								</li>
+							))
+						}
+					</ul>
 				</div>
 			</div>
 
@@ -176,7 +195,16 @@ const userNotes: Array<MessageLog> = [
 			<div class="flex-col space-y-2">
 				<TitleHeader title="Informe de Reporte" />
 				<InputText />
-				<div class="flex w-full space-x-4 justify-end">
+				<div class="flex w-full space-x-4">
+					<a
+						href=`${base}/emergency_diagram`
+						id="agregar"
+						type="button"
+						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+						style="background-color: #ED1C24; border-radius: 10px;"
+					>
+						Diagrama de emergencia
+					</a>
 					<button
 						id="guardar_informe"
 						type="button"
