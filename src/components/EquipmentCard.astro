@@ -7,13 +7,15 @@ interface Props {
 }
 
 const { equipment } = Astro.props;
+
+const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 ---
 
 <div
     class="flex space-x-4 items-center border-2 border-gray px-4 py-5 rounded-lg"
 >
-    <a href="/emergency_diagram">
-        <img src="iconmonstr-eye.png" class="w-30px h-30px">
+    <a href=`${base}/emergency_diagram`>
+        <img src="iconmonstr-eye.png" class="w-30px h-30px" />
     </a>
     <TitleDescription title={equipment.name} />
 </div>

@@ -121,14 +121,15 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 </script>
 
 <Layout title="Emergencia">
-
 	<div class="flex relative items-center justify-center py-20">
 		<EmergencyHeader />
 	</div>
-	
-	<main class="w-full grid grid-cols-10 grid-row-2 px-20 gap-10">
 
-		<div class="flex flex-col col-span-2 border-2 border-gray rounded-lg p-4 gap-4" style="height: 950px;">
+	<main class="w-full grid grid-cols-10 grid-row-2 px-20 gap-10">
+		<div
+			class="flex flex-col col-span-2 border-2 border-gray rounded-lg p-4 gap-4"
+			style="height: 950px;"
+		>
 			<EmergencyDescrip />
 			<MapView
 				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.7123765111983!2d-76.97948692517328!3d-12.131821388111735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b8776a2ac8f3%3A0x605485d1e9abefc6!2sGasolinera%20Primax%2C%20Jr.Cerro%20Azul%20227%2C%20Santiago%20de%20Surco%2015803!5e0!3m2!1ses-419!2spe!4v1717621038532!5m2!1ses-419!2spe"
@@ -142,19 +143,19 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 		</div>
 
 		<div class="col-span-5 space-y-8">
-
-			<div class="flex flex-col space-y-4 border-2 border-gray rounded-lg p-10" >
-				    <RiskClassifications
+			<div
+				class="flex flex-col space-y-4 border-2 border-gray rounded-lg p-10"
+			>
+				<RiskClassifications
 					title="Clasificaciones de riesgo"
 					riskClassfications={riskClassifications}
-					/>
-					<Uncodes
-						title="Códigos UN"
-						unCodes={unCodes}
-					/>
+				/>
+				<Uncodes title="Códigos UN" unCodes={unCodes} />
 			</div>
 
-			<div class="flex flex-col space-y-4 border-2 border-gray rounded-lg p-10">
+			<div
+				class="flex flex-col space-y-4 border-2 border-gray rounded-lg p-10"
+			>
 				<Personnel title="Personal" staff={staff} />
 				<Equipments title="Recursos" equipments={equipments} />
 			</div>
@@ -186,7 +187,6 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 				</div>
 			</div>
 
-			
 			<div class="flex flex-col space-y-2">
 				<TitleHeader title="Áreas afectadas" />
 				<ChipInput client:load />
@@ -195,62 +195,57 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 			<div class="flex-col space-y-2">
 				<TitleHeader title="Informe de Reporte" />
 				<InputText />
-				<div class="flex w-full space-x-4">
-					<a
-						href=`${base}/emergency_diagram`
-						id="agregar"
-						type="button"
-						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-						style="background-color: #ED1C24; border-radius: 10px;"
-					>
-						Diagrama de emergencia
-					</a>
-					<button
-						id="guardar_informe"
-						type="button"
-						class="text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
-						style="background-color: #ED1C24; border-radius: 10px;"
-					>
-						Guardar
-					</button>
+				<button
+					id="guardar_informe"
+					type="button"
+					class="text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
+					style="background-color: #ED1C24; border-radius: 10px;"
+				>
+					Guardar
+				</button>
+			</div>
+		</div>
+		<div
+			class="grid col-span-3 grid-cols-2 md:grid-cols-1 gap-4"
+			style="height: 900px;"
+		>
+			<div class="border-2 border-gray rounded-lg p-4">
+				<TitleHeader title="Eventos del incidente" />
+				<EventLogger client:load />
+			</div>
+			<div
+				class="flex flex-col space-y-4 border-2 border-gray rounded-lg p-4"
+			>
+				<TitleHeader title="Anotaciones usuarios" />
+				<div class="border-2 border-gray p-5 rounded-lg min-h-3/4">
+					<ul class="flex-col space-y-4">
+						{
+							userNotes.map((data) => (
+								<li class="flex space-x-4">
+									<p class="whitespace-nowrap">{data.time}</p>
+									<p class="">{data.message}</p>
+								</li>
+							))
+						}
+					</ul>
 				</div>
 			</div>
 		</div>
-			<div class="grid col-span-3 grid-cols-2 md:grid-cols-1 gap-4" style="height: 900px;">
-				<div class="border-2 border-gray rounded-lg p-4">
-					<TitleHeader title="Eventos del incidente" />
-					<EventLogger client:load />
-				</div>
-				<div class="flex flex-col space-y-4 border-2 border-gray rounded-lg p-4">
-					<TitleHeader title="Anotaciones usuarios" />
-					<div class="border-2 border-gray p-5 rounded-lg min-h-3/4">
-						<ul class="flex-col space-y-4">
-							{
-								userNotes.map((data) => (
-									<li class="flex space-x-4">
-										<p class="whitespace-nowrap">{data.time}</p>
-										<p class="">{data.message}</p>
-									</li>
-								))
-							}
-						</ul>
-					</div>
-				</div>	
-			</div>
 	</main>
 
-		<hr class="my-3 border-2 border-gray" />
-			<div class="grid grid-cols-3 p-2">
-				<div></div>
-				<div class="relative">
-				  <button
-					id="generar_informe"
-					type="button"
-					class="absolute right-0 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
-					style="background-color: #ED1C24; border-radius: 10px;"
-				  >
-					Generar informe
-				  </button>
-				</div>
-		    </div>
-			<div class="p-6"></div>
+	<hr class="my-3 border-2 border-gray" />
+	<div class="grid grid-cols-3 p-2">
+		<div></div>
+		<div class="relative">
+			<button
+				id="generar_informe"
+				type="button"
+				class="absolute right-0 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
+				style="background-color: #ED1C24; border-radius: 10px;"
+			>
+				Generar informe
+			</button>
+		</div>
+	</div>
+	<div class="p-6"></div>
+</Layout>
