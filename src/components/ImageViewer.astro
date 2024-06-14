@@ -10,9 +10,48 @@ const { title } = Astro.props;
 
 <section class="flex-col space-y-4">
     <TitleHeader title={title} />
-    <img src="images 1.png" />
+    <img id="mainImage" class="main-image" src="images 1.png" />
     <div class="flex space-x-4">
-        <img src="images 2.png" />
-        <img src="images 3.png" />
+        <img class="thumbnail" src="images 1.png" />
+        <img class="thumbnail" src="images 2.png" />
+        <img class="thumbnail" src="images 3.png" />
     </div>
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Selecciona la imagen principal
+        const mainImage = document.getElementById('mainImage');
+
+        // Selecciona todas las imágenes pequeñas
+        const thumbnails = document.querySelectorAll('.thumbnail');
+
+        // Agrega un evento de clic a cada imagen pequeña
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                // Cambia el src de la imagen principal al src de la imagen pequeña clicada
+                mainImage.src = thumbnail.src;
+            });
+        });
+    });
+</script>
+
+
+<style>
+    .main-image {
+        width: 100%;
+        max-width: 600px; 
+        height: auto;
+        margin: 0 auto;
+    }
+
+    .thumbnail {
+        width: 50px;
+        height: auto;
+        cursor: pointer;
+    }
+
+    .flex {
+        justify-content: left;
+    }
+</style>

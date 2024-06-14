@@ -10,7 +10,7 @@ const { employee } = Astro.props;
 ---
 
 <div
-    class="flex space-x-4 items-center border-4 border-gray px-4 py-2 rounded-lg"
+    class="flex space-x-4 items-center border-2 border-gray px-4 py-2 rounded-lg"
 >
     <img
         src="contacto.png"
@@ -22,6 +22,5 @@ const { employee } = Astro.props;
             <TitleDescription title={employee.charge} />
             <TitleDescription title={employee.identification} />
         </div>
-        <img src="boton-llamada.png" class="w-8 h-8" />
     </div>
 </div>

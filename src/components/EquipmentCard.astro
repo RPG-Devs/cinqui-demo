@@ -10,8 +10,10 @@ const { equipment } = Astro.props;
 ---
 
 <div
-    class="flex space-x-4 items-center border-4 border-gray px-4 py-5 rounded-lg"
+    class="flex space-x-4 items-center border-2 border-gray px-4 py-5 rounded-lg"
 >
-    <img src="Group 19.png" class="w-14 h-14" />
+    <a href="/emergency_diagram">
+        <img src="iconmonstr-eye.png" class="w-30px h-30px">
+    </a>
     <TitleDescription title={equipment.name} />
 </div>

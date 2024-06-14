@@ -12,11 +12,17 @@ interface Props {
 const { staff, title } = Astro.props;
 ---
 
+
 <section class="flex-col space-y-2">
-    <TitleHeader title={title} />
+    <div class="flex justify gap-2">
+        <img src="staff.svg">
+        <TitleHeader title={title} />
+    </div>
     <TitleDescription
         customColor="text-accent"
         title={staff.length + ' Activos'}
     />
-    {staff.map((employee) => <PersonnelCard employee={employee} />)}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-4">
+        {staff.map((employee) => <PersonnelCard employee={employee} />)}
+    </div>
 </section>

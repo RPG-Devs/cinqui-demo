@@ -12,7 +12,7 @@ const { src, buttonText } = Astro.props;
         src={src}
         class="rounded"
         width="100%"
-        height="400"
+        height="300"
         style="border:0;"
         allowfullscreen=""
         loading="lazy"
@@ -20,7 +20,20 @@ const { src, buttonText } = Astro.props;
     <button
         class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
         style="background-color: #D9D9D9;"
+        onclick={`copyToClipboard('${src}')`}
     >
         {buttonText}
     </button>
 </section>
+
+<script is:inline>
+window.copyToClipboard = function(text) {
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            alert('URL del MAPA copiado al portapapeles');
+        })
+        .catch((error) => {
+            console.error('Error al copiar la URL:', error);
+        });
+}
+</script>

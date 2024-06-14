@@ -12,8 +12,11 @@ const { riskClassfications, title } = Astro.props;
 ---
 
 <section class="space-y-4 flex-col w-full">
+    <div class="flex justify gap-2 py-4">
+    <img src="icon-risk.svg">
     <TitleHeader title={title} />
-    <div class="flex flex-wrap">
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
         {
             riskClassfications.map((riskClassification) => (
                 <RiskClassificationCard
@@ -23,3 +26,4 @@ const { riskClassfications, title } = Astro.props;
         }
     </div>
 </section>
+

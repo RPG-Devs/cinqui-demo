@@ -5,33 +5,45 @@ import MapView from '~/components/MapView.astro';
 import Personnel from '~/components/Personnel.astro';
 import Equipments from '~/components/Equipments.astro';
 import RiskClassifications from '~/components/RiskClassifications.astro';
+import Uncodes from '~/components/UNCodes.astro';
 import InputText from '~/components/InputText.astro';
 import ChipInput from '~/components/ChipInput.svelte';
 import EventLogger from '~/components/EventLogger.svelte';
 import Layout from '~/layouts/Layout.astro';
 import TitleHeader from '~/components/TitleHeader.astro';
+import EmergencyDescrip from '~/components/EmergencyDescrip.astro';
 
 import type {
 	RiskClassification,
 	Employee,
 	Equipment,
 	MessageLog,
+	UNCodes,
 } from '~/types';
 
 const riskClassifications: Array<RiskClassification> = [
 	{
 		src: 'Clases de Riesgo 1.png',
 		title: 'Clase 1 - Explosivos',
-		unCodes: ['1234', '1005'],
 	},
 	{
 		src: 'Clases de Riesgo 3.png',
 		title: 'Clase 3 - Líquidos inflamables',
-		unCodes: ['3005'],
 	},
 	{
 		src: 'Clases de Riesgo 2.png',
 		title: 'Clase 2 - Inflamables',
+	},
+];
+
+const unCodes: Array<UNCodes> = [
+	{
+		unCodes: ['1234'],
+	},
+	{
+		unCodes: ['3005'],
+	},
+	{
 		unCodes: ['2004'],
 	},
 ];
@@ -107,19 +119,15 @@ const userNotes: Array<MessageLog> = [
 </script>
 
 <Layout title="Emergencia">
-	<main class="w-full grid grid-cols-6 grid-row-2 p-8 gap-4">
-		<div class="row-span-1 col-span-5">
-			<EmergencyHeader />
-		</div>
 
-		<div class="row-span-2">
-			<div class="fixed">
-				<TitleHeader title="Eventos del incidente" />
-				<EventLogger client:load />
-			</div>
-		</div>
+	<div class="flex relative items-center justify-center py-20">
+		<EmergencyHeader />
+	</div>
+	
+	<main class="w-full grid grid-cols-10 grid-row-2 px-20 gap-10">
 
-		<div class="flex-col space-y-4">
+		<div class="flex flex-col col-span-2 border-2 border-gray rounded-lg p-4 gap-4" style="height: 950px;">
+			<EmergencyDescrip />
 			<MapView
 				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.7123765111983!2d-76.97948692517328!3d-12.131821388111735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105b8776a2ac8f3%3A0x605485d1e9abefc6!2sGasolinera%20Primax%2C%20Jr.Cerro%20Azul%20227%2C%20Santiago%20de%20Surco%2015803!5e0!3m2!1ses-419!2spe!4v1717621038532!5m2!1ses-419!2spe"
 				buttonText="Copiar Dirección"
@@ -131,43 +139,35 @@ const userNotes: Array<MessageLog> = [
 			</div>
 		</div>
 
-		<div class="col-span-4 space-y-6">
-			<RiskClassifications
-				title="Clasificaciones de riesgo"
-				riskClassfications={riskClassifications}
-			/>
-			<div class="flex space-x-4">
+		<div class="col-span-5 space-y-8">
+
+			<div class="flex flex-col space-y-4 border-2 border-gray rounded-lg p-10" >
+				    <RiskClassifications
+					title="Clasificaciones de riesgo"
+					riskClassfications={riskClassifications}
+					/>
+					<Uncodes
+						title="Códigos UN"
+						unCodes={unCodes}
+					/>
+			</div>
+
+			<div class="flex flex-col space-y-4 border-2 border-gray rounded-lg p-10">
 				<Personnel title="Personal" staff={staff} />
 				<Equipments title="Recursos" equipments={equipments} />
-			</div>
-
-			<div class="flex flex-col space-y-2">
-				<TitleHeader title="Damnificados" />
-				<a
-					class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-min"
-					style="background-color: #ED1C24; border-radius: 10px;"
-					href="/cinqui-demo/injured"
-				>
-					Agregar
-				</a>
-			</div>
-
-			<div class="flex flex-col space-y-2">
-				<TitleHeader title="Anotaciones usuarios" />
-				<div class="border-4 border-gray p-5 rounded-lg min-h-3/4">
-					<ul class="flex-col space-y-4">
-						{
-							userNotes.map((data) => (
-								<li class="flex space-x-4">
-									<p class="whitespace-nowrap">{data.time}</p>
-									<p class="">{data.message}</p>
-								</li>
-							))
-						}
-					</ul>
+				<div class="flex flex-col space-y-2">
+					<TitleHeader title="Damnificados" />
+					<a
+						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-min"
+						style="background-color: #ED1C24; border-radius: 10px;"
+						href="/injured"
+					>
+						Agregar
+					</a>
 				</div>
 			</div>
 
+			
 			<div class="flex flex-col space-y-2">
 				<TitleHeader title="Áreas afectadas" />
 				<ChipInput client:load />
@@ -176,26 +176,53 @@ const userNotes: Array<MessageLog> = [
 			<div class="flex-col space-y-2">
 				<TitleHeader title="Informe de Reporte" />
 				<InputText />
-				<div class="flex w-full space-x-4">
-					<a
-						href="/cinqui-demo/emergency_diagram"
-						id="agregar"
-						type="button"
-						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-						style="background-color: #ED1C24; border-radius: 10px;"
-					>
-						Diagrama de emergencia
-					</a>
+				<div class="flex w-full space-x-4 justify-end">
 					<button
-						id="generar_informe"
+						id="guardar_informe"
 						type="button"
-						class="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+						class="text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
 						style="background-color: #ED1C24; border-radius: 10px;"
 					>
-						Generar informe
+						Guardar
 					</button>
 				</div>
 			</div>
 		</div>
+			<div class="grid col-span-3 grid-cols-2 md:grid-cols-1 gap-4" style="height: 900px;">
+				<div class="border-2 border-gray rounded-lg p-4">
+					<TitleHeader title="Eventos del incidente" />
+					<EventLogger client:load />
+				</div>
+				<div class="flex flex-col space-y-4 border-2 border-gray rounded-lg p-4">
+					<TitleHeader title="Anotaciones usuarios" />
+					<div class="border-2 border-gray p-5 rounded-lg min-h-3/4">
+						<ul class="flex-col space-y-4">
+							{
+								userNotes.map((data) => (
+									<li class="flex space-x-4">
+										<p class="whitespace-nowrap">{data.time}</p>
+										<p class="">{data.message}</p>
+									</li>
+								))
+							}
+						</ul>
+					</div>
+				</div>	
+			</div>
 	</main>
-</Layout>
+
+		<hr class="my-3 border-2 border-gray" />
+			<div class="grid grid-cols-3 p-2">
+				<div></div>
+				<div class="relative">
+				  <button
+					id="generar_informe"
+					type="button"
+					class="absolute right-0 text-white font-bold py-2 px-8 rounded focus:outline-none focus:shadow-outline"
+					style="background-color: #ED1C24; border-radius: 10px;"
+				  >
+					Generar informe
+				  </button>
+				</div>
+		    </div>
+			<div class="p-6"></div>

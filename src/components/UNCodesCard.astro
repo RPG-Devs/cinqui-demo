@@ -1,0 +1,21 @@
+---
+import type { UNCodes } from '~/types';
+import TitleDescription from './TitleDescription.astro';
+
+interface Props {
+    unCodes: UNCodes;
+}
+
+const { unCodes } = Astro.props;
+---
+
+<div
+    class="border-2 border-gray flex items-center p-2 rounded-lg space-x-4 w-100 h-12 m-2"
+>
+    <div class="flex-col">
+        <TitleDescription
+        customColor="text-accent"
+        title={unCodes.unCodes.map((code) => code).join(', ')}
+    />
+    </div>
+</div>

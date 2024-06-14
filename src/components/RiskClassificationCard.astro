@@ -9,16 +9,7 @@ interface Props {
 const { riskClassfication } = Astro.props;
 ---
 
-<div
-    class="border-4 border-gray flex items-center p-2 rounded space-x-4 w-100 h-20 m-2"
->
-    <img width="15%" height="80" src={riskClassfication.src} />
-    <div class="flex-col">
-        <TitleDescription title={riskClassfication.title} />
-        <TitleDescription
-            customColor="text-accent"
-            title={'Códigos UN: ' +
-                riskClassfication.unCodes.map((code) => code).join(', ')}
-        />
-    </div>
+<div class="flex space-x-4 items-center border-2 border-gray px-3 py-2 rounded-lg">
+    <img src={riskClassfication.src} class="w-20px h-20px">
+    <TitleDescription title={riskClassfication.title} />
 </div>

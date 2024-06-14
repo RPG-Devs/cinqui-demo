@@ -1,0 +1,29 @@
+---
+import type { UNCodes } from '~/types';
+import TitleHeader from './TitleHeader.astro';
+import UNCodesCard from './UNCodesCard.astro';
+
+interface Props {
+    title: string;
+    unCodes: Array<UNCodes>;
+}
+
+const { unCodes, title } = Astro.props;
+---
+
+<section class="space-y-4 flex-col w-full">
+    
+    <div class="flex justify gap-2 py-4">
+        <img src="icon-risk.svg">
+        <TitleHeader title={title} />
+    </div>
+    <div class="flex flex-wrap">
+        {
+            unCodes.map((unCodes) => (
+                <UNCodesCard
+                    unCodes={unCodes}
+                />
+            ))
+        }
+    </div>
+</section>

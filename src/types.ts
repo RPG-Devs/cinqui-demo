@@ -1,6 +1,9 @@
 export interface RiskClassification {
     src: string;
     title: string;
+}
+
+export interface UNCodes {
     unCodes: Array<string>;
 }
 

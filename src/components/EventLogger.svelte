@@ -68,7 +68,7 @@ export let loadData = [
 </script>
 
 <section class="flex flex-col space-y-4 mt-4">
-    <div id="textoImpreso" class="border-4 border-gray p-5 rounded-lg min-h-3/4">
+    <div id="textoImpreso" class="border-2 border-gray p-5 rounded-lg min-h-3/4">
         <ul class="flex-col space-y-4">
             {#each loadData as data}
             <li class="flex space-x-4">
@@ -78,7 +78,7 @@ export let loadData = [
             {/each}
         </ul>
     </div>    
-    <div class="border-4 border-gray p-4 rounded-lg">
+    <div class="border-2 border-gray p-4 rounded-lg">
             <button
                 on:click={addBombero}
                 id="bombero"
@@ -104,7 +104,7 @@ export let loadData = [
                 SAMU
             </button>
             <div class="-mx-4">
-            <hr class="my-3 border-2 border-gray" />
+            <hr class="my-3 border-1 border-gray" />
             </div>
 
             <textarea
@@ -113,7 +113,7 @@ export let loadData = [
                 class="shadow appearance-none border w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline border-gray p-5 rounded-lg"
                 placeholder="Estación de almacen..."></textarea>      
     
-        <div class="mb-4">
+        <div class="flex justify-end my-2 mb-2">
             <button
                 on:click={addData}
                 id="agregar"
