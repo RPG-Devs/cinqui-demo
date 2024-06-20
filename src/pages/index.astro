@@ -121,11 +121,11 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 </script>
 
 <Layout title="Emergencia">
-	<div class="flex relative items-center justify-center py-20">
+	<div class="flex relative items-center justify-center pb-10">
 		<EmergencyHeader />
 	</div>
 
-	<main class="w-full grid grid-cols-10 grid-row-2 px-20 gap-10">
+	<main class="w-full grid grid-cols-10 grid-row-2 px-10 gap-8">
 		<div
 			class="flex flex-col col-span-2 border-2 border-gray rounded-lg p-4 gap-4"
 			style="height: 950px;"
@@ -169,22 +169,6 @@ const base = import.meta.env.BASE_URL === '/' ? '' : import.meta.env.BASE_URL;
 				>
 					Agregar
 				</a>
-			</div>
-
-			<div class="flex flex-col space-y-2">
-				<TitleHeader title="Anotaciones usuarios" />
-				<div class="border-2 border-gray p-5 rounded-lg min-h-3/4">
-					<ul class="flex-col space-y-4">
-						{
-							userNotes.map((data) => (
-								<li class="flex space-x-4">
-									<p class="whitespace-nowrap">{data.time}</p>
-									<p class="">{data.message}</p>
-								</li>
-							))
-						}
-					</ul>
-				</div>
 			</div>
 
 			<div class="flex flex-col space-y-2">
